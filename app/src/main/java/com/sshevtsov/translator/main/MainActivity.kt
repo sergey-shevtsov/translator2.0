@@ -1,4 +1,4 @@
-package com.sshevtsov.translator
+package com.sshevtsov.translator.main
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

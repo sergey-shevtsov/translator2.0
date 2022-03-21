@@ -1,4 +1,4 @@
-package com.sshevtsov.translator
+package com.sshevtsov.translator.main
 
 import android.app.Application
 import com.sshevtsov.translator.di.foreground
