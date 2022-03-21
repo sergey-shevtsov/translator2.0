@@ -13,14 +13,9 @@ object DataModelMapper {
     return DataModel(
       id = dataModelResponse.id ?: 0,
       text = dataModelResponse.text.orEmpty(),
-      meanings = if (dataModelResponse.meanings != null) {
-        dataModelResponse.meanings
+      meanings =dataModelResponse.meanings
           .filterNotNull()
           .map { toDomain(it) }
-          .toTypedArray()
-      } else {
-        emptyArray()
-      }
     )
   }
 

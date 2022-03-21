@@ -15,7 +15,7 @@ private const val SEARCH = "words/search"
 interface TranslatorApi {
 
   @GET(SEARCH)
-  suspend fun search(@Query("search") wordToSearch: String): Array<DataModelResponse>
+  suspend fun search(@Query("search") wordToSearch: String): List<DataModelResponse>
 
   companion object {
 

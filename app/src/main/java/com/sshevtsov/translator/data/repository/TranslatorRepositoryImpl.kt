@@ -9,8 +9,7 @@ class TranslatorRepositoryImpl(
   private val translatorApi: TranslatorApi
 ) : TranslatorRepository {
 
-  override suspend fun search(wordToSearch: String): Array<DataModel> =
+  override suspend fun search(wordToSearch: String): List<DataModel> =
     translatorApi.search(wordToSearch)
       .map { DataModelMapper.toDomain(it) }
-      .toTypedArray()
 }
