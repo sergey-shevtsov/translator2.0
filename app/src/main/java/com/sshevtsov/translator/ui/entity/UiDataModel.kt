@@ -1,20 +1,28 @@
 package com.sshevtsov.translator.ui.entity
 
+import com.sshevtsov.translator.domain.entity.UrlPath
+
 data class UiDataModel(
-  val id: Int,
+  val id: Id,
   val text: String,
   val meanings: List<UiMeaning>
-)
+) {
+  @JvmInline
+  value class Id(val value: Any)
+}
 
 data class UiMeaning(
-  val id: Int,
-  val partOfSpeechCode: String,
+  val id: Id,
+  val partOfSpeechCode: String?,
   val translation: UiTranslation,
-  val previewUrl: String,
-  val imageUrl: String,
-  val transcription: String,
-  val soundUrl: String
-)
+  val previewUrl: UrlPath?,
+  val imageUrl: UrlPath?,
+  val transcription: String?,
+  val soundUrl: UrlPath?
+) {
+  @JvmInline
+  value class Id(val value: Any)
+}
 
 data class UiTranslation(
   val text: String,

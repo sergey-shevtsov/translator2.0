@@ -1,20 +1,26 @@
 package com.sshevtsov.translator.domain.entity
 
 data class DataModel(
-  val id: Int,
+  val id: Id,
   val text: String,
   val meanings: List<Meaning>
-)
+) {
+  @JvmInline
+  value class Id(val value: Any)
+}
 
 data class Meaning(
-  val id: Int,
-  val partOfSpeechCode: String,
+  val id: Id,
+  val partOfSpeechCode: String?,
   val translation: Translation,
-  val previewUrl: String,
-  val imageUrl: String,
-  val transcription: String,
-  val soundUrl: String
-)
+  val previewUrl: UrlPath?,
+  val imageUrl: UrlPath?,
+  val transcription: String?,
+  val soundUrl: UrlPath?
+) {
+  @JvmInline
+  value class Id(val value: Any)
+}
 
 data class Translation(
   val text: String,

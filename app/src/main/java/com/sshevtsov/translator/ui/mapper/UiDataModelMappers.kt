@@ -7,32 +7,29 @@ import com.sshevtsov.translator.ui.entity.UiDataModel
 import com.sshevtsov.translator.ui.entity.UiMeaning
 import com.sshevtsov.translator.ui.entity.UiTranslation
 
-object UiDataModelMapper {
+fun DataModel.toUiModel(): UiDataModel =
+  UiDataModel(
+    id = UiDataModel.Id(this.id),
+    text = this.text,
+    meanings = this.meanings.map { it.toUiModel() }
+  )
 
-  fun toUi(dataModel: DataModel): UiDataModel =
-    UiDataModel(
-      id = dataModel.id,
-      text = dataModel.text,
-      meanings = dataModel.meanings.map { toUi(it) }
-    )
+private fun Meaning.toUiModel(): UiMeaning =
+  UiMeaning(
+    id = UiMeaning.Id(this.id),
+    partOfSpeechCode = this.partOfSpeechCode?.fullSpeechCode,
+    translation = this.translation.toUiModel(),
+    previewUrl = this.previewUrl,
+    imageUrl = this.imageUrl,
+    transcription = this.transcription,
+    soundUrl = this.soundUrl
+  )
 
-  private fun toUi(meaning: Meaning): UiMeaning =
-    UiMeaning(
-      id = meaning.id,
-      partOfSpeechCode = meaning.partOfSpeechCode.fullSpeechCode,
-      translation = toUi(meaning.translation),
-      previewUrl = meaning.previewUrl,
-      imageUrl = meaning.imageUrl,
-      transcription = meaning.transcription,
-      soundUrl = meaning.soundUrl
-    )
-
-  private fun toUi(translation: Translation): UiTranslation =
-    UiTranslation(
-      text = translation.text,
-      note = translation.note
-    )
-}
+private fun Translation.toUiModel(): UiTranslation =
+  UiTranslation(
+    text = this.text,
+    note = this.note
+  )
 
 private val String.fullSpeechCode: String
   get() {
