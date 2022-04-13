@@ -21,8 +21,8 @@ private fun MeaningResponse.toDomainModel(): Meaning {
     id = Meaning.Id(this.id),
     partOfSpeechCode = this.partOfSpeechCode?.takeIf { it.isNotBlank() },
     translation = this.translation.toDomainModel(),
-    previewUrl = this.previewUrl?.let { UrlPath(it) }.takeIf { it?.value?.isNotBlank() == true },
-    imageUrl = this.imageUrl?.let { UrlPath(it) }.takeIf { it?.value?.isNotBlank() == true },
+    previewUrl = formatImageUrl(this.previewUrl),
+    imageUrl = formatImageUrl(this.imageUrl),
     transcription = this.transcription.orEmpty(),
     soundUrl = this.soundUrl?.let { UrlPath(it) }.takeIf { it?.value?.isNotBlank() == true },
   )
@@ -34,3 +34,16 @@ private fun TranslationResponse.toDomainModel(): Translation {
     note = this.note?.takeIf { it.isNotBlank() }
   )
 }
+
+private fun formatImageUrl(url: String?): UrlPath? {
+  if (url.isNullOrBlank()) return null
+  return UrlPath(
+    value = if (url.startsWith(URL_PREFIX)) {
+      url
+    } else {
+      "$URL_PREFIX$url"
+    }
+  )
+}
+
+private const val URL_PREFIX = "https:"
