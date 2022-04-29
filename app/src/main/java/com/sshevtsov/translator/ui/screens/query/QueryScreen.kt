@@ -1,4 +1,4 @@
-package com.sshevtsov.translator.ui.screens.main
+package com.sshevtsov.translator.ui.screens.query
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -16,7 +16,7 @@ import com.sshevtsov.translator.ui.components.SearchProgress
 import com.sshevtsov.translator.ui.components.SearchTextField
 
 @Composable
-fun MainScreen(viewModel: MainViewModel) {
+fun QueryScreen(viewModel: QueryViewModel) {
   val state by viewModel.state.collectAsState(ViewState())
 
   Column {

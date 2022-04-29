@@ -1,4 +1,4 @@
-package com.sshevtsov.translator.ui.screens.main
+package com.sshevtsov.translator.ui.screens.query
 
 import androidx.annotation.DrawableRes
 import androidx.compose.runtime.Immutable
@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class MainViewModel(
+class QueryViewModel(
   private val translatorModel: TranslatorModel
 ) : ViewModel() {
 
