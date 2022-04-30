@@ -10,12 +10,15 @@ import com.sshevtsov.translator.ui.entity.UiDataModel
 import com.sshevtsov.translator.ui.mapper.toUiModel
 import com.sshevtsov.translator.util.ConnectionStatus
 import com.sshevtsov.translator.util.NetworkManager
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 class QueryViewModel(
   private val translatorModel: TranslatorModel,
@@ -23,6 +26,7 @@ class QueryViewModel(
 ) : ViewModel() {
 
   private var previousQuery = ""
+  private var queryJob: Job? = null
 
   private val _state = MutableStateFlow(ViewState())
   val state: Flow<ViewState> get() = _state
@@ -63,6 +67,11 @@ class QueryViewModel(
   fun changeQuery(query: String) {
     _state.update {
       it.copy(currentQuery = query)
+    }
+    queryJob?.cancel()
+    queryJob = viewModelScope.launch {
+      delay(500)
+      search(query)
     }
   }
 
