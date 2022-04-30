@@ -3,4 +3,6 @@
     <string name="main_enter_query">Введите запрос</string>
     <string name="main_no_query_message">Результаты поиска будут здесь.</string>
     <string name="main_empty_result_message">Ничего не найдено. Попробуйте изменить запрос.</string>
+    <string name="network_error_message">Нет соединения с интернетом.</string>
+    <string name="common_error_message">Произошла ошибка. Попробуйте еще раз.</string>
 </resources>

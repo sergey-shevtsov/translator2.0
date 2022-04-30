@@ -13,8 +13,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
+
 @Composable
-fun InfoMessage(
+fun ErrorMessage(
   modifier: Modifier = Modifier,
   @StringRes
   textResId: Int
@@ -27,6 +28,7 @@ fun InfoMessage(
       modifier = Modifier.padding(horizontal = 32.dp),
       text = stringResource(id = textResId),
       style = MaterialTheme.typography.body2,
+      color = MaterialTheme.colors.error,
       textAlign = TextAlign.Center
     )
   }

@@ -11,13 +11,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.sshevtsov.translator.R
 import com.sshevtsov.translator.ui.components.DataModelList
+import com.sshevtsov.translator.ui.components.ErrorMessage
 import com.sshevtsov.translator.ui.components.InfoMessage
 import com.sshevtsov.translator.ui.components.SearchProgress
 import com.sshevtsov.translator.ui.components.SearchTextField
 
 @Composable
 fun QueryScreen(viewModel: QueryViewModel) {
-  val state by viewModel.state.collectAsState(ViewState())
+  val state: ViewState by viewModel.state.collectAsState(ViewState())
 
   Column {
     SearchTextField(
@@ -31,18 +32,21 @@ fun QueryScreen(viewModel: QueryViewModel) {
     )
     when {
       state.progressIsVisible -> SearchProgress()
-      state.errorIsVisible -> { /* TODO() */ }
-      state.infoMessageIsVisible && state.infoMessageResId != null -> {
+      state.errorMessageResId != null -> {
+        ErrorMessage(textResId = state.errorMessageResId!!)
+      }
+      state.infoMessageResId != null -> {
         InfoMessage(textResId = state.infoMessageResId!!)
       }
-      else -> {
+      state.result.isNotEmpty() -> {
         DataModelList(
-          list = state.resultList,
+          list = state.result,
           expandedIds = state.expandedIds,
           onExpandClick = { id -> viewModel.expandDataModel(id) },
           onMeaningClick = { /* TODO() */ }
         )
       }
+      else -> error("If the result list is empty, then a progress, info message, or error message should be visible")
     }
   }
 }

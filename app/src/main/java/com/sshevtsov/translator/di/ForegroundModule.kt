@@ -15,5 +15,5 @@ val foreground = module {
   single { TranslatorApi.create() }
   single<TranslatorRepository> { TranslatorRepositoryImpl(get()) }
   single<TranslatorModel> { TranslatorModelImpl(get()) }
-  viewModel { QueryViewModel(get()) }
+  viewModel { QueryViewModel(get(), get()) }
 }
