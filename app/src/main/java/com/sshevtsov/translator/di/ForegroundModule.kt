@@ -6,10 +6,12 @@ import com.sshevtsov.translator.domain.model.TranslatorModel
 import com.sshevtsov.translator.domain.model.TranslatorModelImpl
 import com.sshevtsov.translator.domain.repository.TranslatorRepository
 import com.sshevtsov.translator.ui.screens.query.QueryViewModel
+import com.sshevtsov.translator.util.NetworkManager
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val foreground = module {
+  single { NetworkManager(get()) }
   single { TranslatorApi.create() }
   single<TranslatorRepository> { TranslatorRepositoryImpl(get()) }
   single<TranslatorModel> { TranslatorModelImpl(get()) }
