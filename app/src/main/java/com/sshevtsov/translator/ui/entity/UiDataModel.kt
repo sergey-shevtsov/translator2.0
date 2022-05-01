@@ -13,7 +13,7 @@ data class UiDataModel(
 
 data class UiMeaning(
   val id: Id,
-  val partOfSpeechCode: String?,
+  val speechCodeResId: Int?,
   val translation: UiTranslation,
   val previewUrl: UrlPath?,
   val imageUrl: UrlPath?,

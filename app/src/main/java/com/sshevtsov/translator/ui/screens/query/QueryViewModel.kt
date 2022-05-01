@@ -5,8 +5,11 @@ import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sshevtsov.translator.R
+import com.sshevtsov.translator.domain.entity.DataModel
+import com.sshevtsov.translator.domain.entity.Meaning
 import com.sshevtsov.translator.domain.model.TranslatorModel
 import com.sshevtsov.translator.ui.entity.UiDataModel
+import com.sshevtsov.translator.ui.entity.UiMeaning
 import com.sshevtsov.translator.ui.mapper.toUiModel
 import com.sshevtsov.translator.util.ConnectionStatus
 import com.sshevtsov.translator.util.NetworkManager
@@ -15,14 +18,13 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class QueryViewModel(
-  private val translatorModel: TranslatorModel,
+  private val model: TranslatorModel,
   private val networkManager: NetworkManager
 ) : ViewModel() {
 
@@ -33,12 +35,11 @@ class QueryViewModel(
   val state: Flow<ViewState> get() = _state
 
   init {
-    translatorModel.start(viewModelScope)
     subscribeToSearchResult()
   }
 
   private fun subscribeToSearchResult() {
-    translatorModel.searchResults().consumeAsFlow()
+    model.searchResults()
       .catch {
         _state.update {
           _state.value.copy(
@@ -63,6 +64,13 @@ class QueryViewModel(
         }
       }
       .launchIn(viewModelScope)
+  }
+
+  fun openDetails(dataModelId: UiDataModel.Id, meaningId: UiMeaning.Id) {
+    model.setChosenIds(
+      dataModelId = DataModel.Id(dataModelId.value),
+      meaningId = Meaning.Id(meaningId.value)
+    )
   }
 
   fun changeQuery(query: String) {
@@ -100,7 +108,7 @@ class QueryViewModel(
             progressIsVisible = true
           )
         }
-        translatorModel.search(query)
+        model.search(query)
       }
       ConnectionStatus.Lost -> {
         previousQuery = ""

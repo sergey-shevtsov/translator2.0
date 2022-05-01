@@ -1,11 +1,13 @@
 package com.sshevtsov.translator.domain.model
 
 import com.sshevtsov.translator.domain.entity.DataModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.channels.Channel
+import com.sshevtsov.translator.domain.entity.Meaning
+import kotlinx.coroutines.flow.Flow
 
 interface TranslatorModel {
-  fun start(scope: CoroutineScope)
   fun search(wordToSearch: String)
-  fun searchResults(): Channel<List<DataModel>>
+  fun searchResults(): Flow<List<DataModel>>
+  fun setChosenIds(dataModelId: DataModel.Id, meaningId: Meaning.Id)
+  fun chosenDataModel(): Flow<DataModel>
+  fun chosenMeaning(): Flow<Meaning>
 }

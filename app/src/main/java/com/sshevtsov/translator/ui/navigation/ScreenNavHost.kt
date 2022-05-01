@@ -5,6 +5,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.sshevtsov.translator.ui.screens.detail.DetailsScreen
 import com.sshevtsov.translator.ui.screens.query.QueryScreen
 import org.koin.androidx.compose.getViewModel
 
@@ -18,6 +19,11 @@ fun ScreenNavHost(
     navController = navController,
     startDestination = Screen.Query.name
   ) {
-    composable(route = Screen.Query.name) { QueryScreen(viewModel = getViewModel()) }
+    composable(route = Screen.Query.name) {
+      QueryScreen(viewModel = getViewModel(), navController = navController)
+    }
+    composable(route = Screen.Details.name) {
+      DetailsScreen(viewModel = getViewModel())
+    }
   }
 }

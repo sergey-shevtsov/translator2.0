@@ -41,7 +41,7 @@ fun DataModelList(
   list: List<UiDataModel>,
   expandedIds: Set<UiDataModel.Id>,
   onExpandClick: (UiDataModel.Id) -> Unit,
-  onMeaningClick: (UiMeaning.Id) -> Unit
+  onMeaningClick: (UiDataModel.Id, UiMeaning.Id) -> Unit
 ) {
   LazyColumn(
     modifier = modifier
@@ -53,7 +53,7 @@ fun DataModelList(
           dataModel = dataModel,
           isExpanded = expandedIds.contains(dataModel.id),
           onExpandClick = { onExpandClick(dataModel.id) },
-          onMeaningClick = onMeaningClick
+          onMeaningClick = { meaningId -> onMeaningClick(dataModel.id, meaningId) }
         )
         if (index == list.lastIndex) {
           Divider()

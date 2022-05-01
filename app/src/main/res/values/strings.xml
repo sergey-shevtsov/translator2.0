@@ -5,4 +5,20 @@
     <string name="main_empty_result_message">Ничего не найдено. Попробуйте изменить запрос.</string>
     <string name="network_error_message">Нет соединения с интернетом.</string>
     <string name="common_error_message">Произошла ошибка. Попробуйте еще раз.</string>
+    <string name="speech_code_noun">Существительное</string>
+    <string name="speech_code_verb">Глагол</string>
+    <string name="speech_code_adjective">Имя прилагательное</string>
+    <string name="speech_code_adverb">Наречие</string>
+    <string name="speech_code_preposition">Предлог</string>
+    <string name="speech_code_pronoun">Местоимение</string>
+    <string name="speech_code_cardinal_number">Количественное числительное</string>
+    <string name="speech_code_conjunction">Союз</string>
+    <string name="speech_code_interjection">Междометие</string>
+    <string name="speech_code_article">Артикль</string>
+    <string name="speech_code_abbreviation">Аббревиатура</string>
+    <string name="speech_code_particle">Частица</string>
+    <string name="speech_code_ordinal_number">Порядковый номер</string>
+    <string name="speech_code_modal_verb">Модальный глагол</string>
+    <string name="speech_code_phrase">Речевой оборот</string>
+    <string name="speech_code_idiom">Идиоматическое выражение</string>
 </resources>
