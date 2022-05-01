@@ -15,6 +15,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
@@ -37,7 +38,7 @@ class QueryViewModel(
   }
 
   private fun subscribeToSearchResult() {
-    translatorModel.searchResults()
+    translatorModel.searchResults().consumeAsFlow()
       .catch {
         _state.update {
           _state.value.copy(

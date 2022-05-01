@@ -3,8 +3,7 @@ package com.sshevtsov.translator.domain.model
 import com.sshevtsov.translator.domain.entity.DataModel
 import com.sshevtsov.translator.domain.repository.TranslatorRepository
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
 
 class TranslatorModelImpl(
@@ -23,6 +22,5 @@ class TranslatorModelImpl(
     }
   }
 
-  override fun searchResults(): Flow<List<DataModel>> =
-    repository.searchResults().filterNotNull()
+  override fun searchResults(): Channel<List<DataModel>> = repository.searchResults
 }
