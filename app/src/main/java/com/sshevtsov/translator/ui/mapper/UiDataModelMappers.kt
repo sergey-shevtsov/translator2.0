@@ -32,7 +32,7 @@ private fun Translation.toUiModel(): UiTranslation =
     note = this.note
   )
 
-val String.speechCodeResId: Int
+val String.speechCodeResId: Int?
   get() {
     return when (this) {
       "n" -> R.string.speech_code_noun
@@ -51,6 +51,6 @@ val String.speechCodeResId: Int
       "md" -> R.string.speech_code_modal_verb
       "ph" -> R.string.speech_code_phrase
       "phi" -> R.string.speech_code_idiom
-      else -> 0
+      else -> null
     }
   }

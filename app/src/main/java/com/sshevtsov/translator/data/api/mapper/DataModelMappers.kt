@@ -23,7 +23,7 @@ private fun MeaningResponse.toDomainModel(): Meaning {
     translation = this.translation.toDomainModel(),
     previewUrl = formatImageUrl(this.previewUrl),
     imageUrl = formatImageUrl(this.imageUrl),
-    transcription = this.transcription.orEmpty(),
+    transcription = extractTranscription(this.transcription),
     soundUrl = this.soundUrl?.let { UrlPath(it) }.takeIf { it?.value?.isNotBlank() == true },
   )
 }
@@ -33,6 +33,11 @@ private fun TranslationResponse.toDomainModel(): Translation {
     text = this.text,
     note = this.note?.takeIf { it.isNotBlank() }
   )
+}
+
+private fun extractTranscription(transcription: String?): String? {
+  if (transcription.isNullOrBlank()) return null
+  return "[$transcription]"
 }
 
 private fun formatImageUrl(url: String?): UrlPath? {

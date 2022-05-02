@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.sshevtsov.translator.domain.entity.UrlPath
 import com.sshevtsov.translator.domain.model.TranslatorModel
 import com.sshevtsov.translator.ui.mapper.speechCodeResId
+import com.sshevtsov.translator.util.MediaPlayer
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.launchIn
@@ -14,7 +15,8 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.flow.zip
 
 class DetailsViewModel(
-  model: TranslatorModel
+  model: TranslatorModel,
+  private val mediaPlayer: MediaPlayer
 ) : ViewModel() {
   private val _state = MutableStateFlow(ViewState())
   val state: Flow<ViewState> get() = _state
@@ -35,6 +37,12 @@ class DetailsViewModel(
         }
       }
       .launchIn(viewModelScope)
+  }
+
+  fun playSound() {
+    if (_state.value.soundUrl != null) {
+      mediaPlayer.play(_state.value.soundUrl!!)
+    }
   }
 }
 
