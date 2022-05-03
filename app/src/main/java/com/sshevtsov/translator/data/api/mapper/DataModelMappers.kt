@@ -16,7 +16,7 @@ fun DataModelResponse.toDomainModel(): DataModel {
   )
 }
 
-private fun MeaningResponse.toDomainModel(): Meaning {
+internal fun MeaningResponse.toDomainModel(): Meaning {
   return Meaning(
     id = Meaning.Id(this.id),
     partOfSpeechCode = this.partOfSpeechCode?.takeIf { it.isNotBlank() },
@@ -28,19 +28,19 @@ private fun MeaningResponse.toDomainModel(): Meaning {
   )
 }
 
-private fun TranslationResponse.toDomainModel(): Translation {
+internal fun TranslationResponse.toDomainModel(): Translation {
   return Translation(
     text = this.text,
     note = this.note?.takeIf { it.isNotBlank() }
   )
 }
 
-private fun extractTranscription(transcription: String?): String? {
+internal fun extractTranscription(transcription: String?): String? {
   if (transcription.isNullOrBlank()) return null
   return "[$transcription]"
 }
 
-private fun formatImageUrl(url: String?): UrlPath? {
+internal fun formatImageUrl(url: String?): UrlPath? {
   if (url.isNullOrBlank()) return null
   return UrlPath(
     value = if (url.startsWith(URL_PREFIX)) {
